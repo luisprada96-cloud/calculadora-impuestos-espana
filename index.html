@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿A dónde van tus impuestos? | España</title>
+    <meta name="description" content="Calcula cuánto pagas realmente de impuestos en España y a qué partidas del presupuesto van destinados.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1>¿A dónde van tus <span>impuestos</span>?</h1>
+            <p>Descubre el coste real de tu trabajo y cómo contribuyes a los servicios públicos.</p>
+        </header>
+
+        <section class="calculator-card glass-panel">
+            <div class="input-group">
+                <label for="gross-salary">Salario Anual Bruto (€)</label>
+                <div class="input-wrapper">
+                    <span class="currency-symbol">€</span>
+                    <input type="number" id="gross-salary" placeholder="Ej: 30000" min="0" step="1000">
+                </div>
+                <p class="input-hint">El sueldo anual que figura en tu contrato.</p>
+            </div>
+
+            <button id="calculate-btn" class="primary-btn">
+                <span>Calcular Impacto Fiscal</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="m17 5-5-3-5 3"></path><path d="m17 19-5 3-5-3"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+
+            <button id="mike-btn" class="secondary-btn">
+                <span>MikeCalculameEsta</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+            </button>
+        </section>
+
+        <!-- Nueva sección de porcentajes (oculta por defecto) -->
+        <section id="percentage-breakdown" class="hidden">
+            <div class="glass-panel">
+                <h3>Transparencia de Datos</h3>
+                <p class="section-desc">Porcentajes del Gasto Público Consolidado utilizados en este simulador.</p>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Partida Presupuestaria</th>
+                                <th class="text-right">Porcentaje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="percentage-table-body">
+                            <!-- Se llena por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="results" class="results-section hidden">
+            <!-- Resumen de Coste Total -->
+            <div class="summary-grid">
+                <div class="summary-card glass-panel">
+                    <h3>Coste Total para tu Empresa</h3>
+                    <div class="value large" id="total-cost">0 €</div>
+                    <p>Sueldo Bruto + SS Empresa</p>
+                </div>
+                <div class="summary-card glass-panel highlight-alt">
+                    <h3>Tu Sueldo Neto Mensual</h3>
+                    <div class="value large" id="net-monthly">0 €</div>
+                    <p>Lo que realmente llega a tu cuenta (12 pagas)</p>
+                </div>
+            </div>
+
+            <!-- Visualización de la Cuña Fiscal -->
+            <div class="fiscal-wedge-container glass-panel">
+                <h3>Distribución de tu Esfuerzo Económico</h3>
+                <div class="wedge-bar">
+                    <div id="bar-net" class="wedge-part net" style="width: 60%;"><span>Neto</span></div>
+                    <div id="bar-taxes" class="wedge-part taxes" style="width: 40%;"><span>Impuestos</span></div>
+                </div>
+                <div class="wedge-legend">
+                    <div class="legend-item"><span class="dot net"></span> Te lo quedas tú: <strong id="net-percentage">0%</strong></div>
+                    <div class="legend-item"><span class="dot taxes"></span> Se lo queda el Estado: <strong id="tax-percentage">0%</strong></div>
+                </div>
+            </div>
+
+            <!-- Desglose de Gastos del Gobierno -->
+            <div class="spending-breakdown glass-panel">
+                <h2>¿En qué se gasta el Estado tus impuestos?</h2>
+                <p class="section-desc">Basado en el Gasto Público Consolidado 2023/2024 (Estado, CC.AA. y SS).</p>
+                
+                <div id="spending-list" class="spending-list">
+                    <!-- Las partidas se generarán dinámicamente -->
+                </div>
+
+                <div class="disclaimer-box">
+                    <p><strong>Nota:</strong> Este cálculo incluye IRPF, Seguridad Social (tuya y de tu empresa) y una estimación del 15% de impuestos indirectos (IVA, especial de hidrocarburos, electricidad, etc.) sobre tu consumo neto.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
